@@ -37,4 +37,4 @@ if !exists('g:grep_excludes_dir')
   let g:grep_excludes_dir = ['.git', '.svn']
 endif
 
-command! -nargs=1 Gr call Grep(<f-args>)
+command! -nargs=1 Grep call Grep(<f-args>)
