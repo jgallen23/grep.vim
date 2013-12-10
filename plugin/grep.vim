@@ -57,5 +57,10 @@ function! s:GrepSelection()
   call Grep(sel)
 endfunction
 
+function! s:GrepWord()
+  call Grep(expand('<cword>'))
+endfunction
+
 command! -nargs=1 Grep call Grep(<f-args>)
 command! -range GrepSelection call s:GrepSelection()
+command! GrepWord call s:GrepWord()
