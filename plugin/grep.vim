@@ -1,3 +1,12 @@
+if !exists("g:grep_height")
+  let g:grep_height = 10
+endif
+
+if !exists('g:grep_excludes_dir')
+  let g:grep_excludes_dir = ['.git', '.svn']
+endif
+
+
 function! Grep_exec(cmd, pattern)
   let cmd_output = system(a:cmd)
   if cmd_output == ""
@@ -16,7 +25,7 @@ function! Grep_exec(cmd, pattern)
 
   execute "silent! cgetfile " . tmpfile
   let &efm = old_efm
-  botright copen
+  exec "botright copen " . g:grep_height
 
   call delete(tmpfile)
 
@@ -47,10 +56,6 @@ function! s:GrepSelection()
   let sel = s:GetSelection()
   call Grep(sel)
 endfunction
-
-if !exists('g:grep_excludes_dir')
-  let g:grep_excludes_dir = ['.git', '.svn']
-endif
 
 command! -nargs=1 Grep call Grep(<f-args>)
 command! -range GrepSelection call s:GrepSelection()
